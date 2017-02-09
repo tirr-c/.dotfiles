@@ -12,10 +12,11 @@ umask 022
 autoload -U is-at-least
 if is-at-least 4.3.9 && [ -f ~/.zplug/init.zsh ]; then
   source ~/.zplug/init.zsh
-  zplug zsh-users/zsh-completions
-  zplug zsh-users/zsh-syntax-highlighting
-  zplug simnalamburt/cgitc
-  zplug simnalamburt/shellder, as:theme
+  zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+  zplug 'zsh-users/zsh-completions'
+  zplug 'zsh-users/zsh-syntax-highlighting'
+  zplug 'simnalamburt/cgitc'
+  zplug 'simnalamburt/shellder', as:theme
   zplug load
 else
   PS1='%n@%m:%~%# '
