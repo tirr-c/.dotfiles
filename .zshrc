@@ -126,6 +126,13 @@ if [ -d ~/.cargo/bin ]; then
   export PATH="$PATH:$HOME/.cargo/bin"
 fi
 
+# racer
+RUST_CHANNEL=stable
+RUST_TARGET=x86_64-unknown-linux-gnu
+if hash racer 2>/dev/null && [ -d ~/ ]; then
+  export RUST_SRC_PATH="$HOME/.multirust/toolchains/${RUST_CHANNEL}-${RUST_TARGET}/lib/rustlib/src/rust/src"
+fi
+
 # yarn
 if [ -d ~/.yarn ]; then
   export PATH="$PATH:$HOME/.yarn/bin"
