@@ -54,6 +54,7 @@ Plug 'junegunn/seoul256.vim'
 Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
 Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 
 call plug#end()
 
@@ -63,3 +64,5 @@ let g:strip_whitespace_on_save = 1
 
 let g:seoul256_background = 233
 colo seoul256
+
+let g:jsx_ext_required = 0
