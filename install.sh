@@ -7,9 +7,9 @@ if [ "$(pwd)" != "$HOME" ]; then
 fi
 
 # Dependencies
-DEPS="zsh curl"
+DEPS="zsh curl git"
 for dep in $DEPS; do
-  echo "Dependency: $dep"
+  echo "Checking dependency: $dep"
   which $dep >/dev/null 2>&1
   if [ ! $? ]; then
     echo "Please install $dep."
@@ -25,6 +25,11 @@ curl -sL zplug.sh/installer | zsh
 echo "Installing vim-plug"
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+# junegunn/fzf
+echo "Installing fzf"
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
 
 # Symlinking
 BASEDIR="$(dirname "$0")"
