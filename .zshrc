@@ -146,6 +146,12 @@ if hash yarn 2>/dev/null; then
   export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
 fi
 
+# torch
+if [ -d ~/torch/install ]; then
+  export PATH="$HOME/torch/install/bin:$PATH"
+  export LD_LIBRARY_PATH="$HOME/torch/install/lib:$LD_LIBRARY_PATH"
+fi
+
 # pyenv
 if [ -d ~/.pyenv ]; then
   export PATH="$HOME/.pyenv/bin:$PATH"
