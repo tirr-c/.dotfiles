@@ -6,6 +6,9 @@
 # WSL: Why do I need this?
 umask 022
 
+# GPG
+export GPG_TTY=`tty`
+
 #
 # zplug
 #
