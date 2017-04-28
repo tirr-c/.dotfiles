@@ -43,9 +43,6 @@ zstyle ':completion:*' menu select
 # lscolors
 #
 autoload -U colors && colors
-export LSCOLORS="Gxfxcxdxbxegedabagacad"
-export LS_COLORS="di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:"
-export TIME_STYLE="+%y%m%d"
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # Find the option for using colors in ls, depending on the version: Linux or BSD
@@ -101,14 +98,28 @@ fi
 #
 # zshrc
 #
+
+# SOCKS5 proxy alias
+alias arisa-proxy='ssh -D 1080 -C -N -f -q arisa'
+
+# typo alias
+alias ㅣ=l
+alias 니=ls
+
+# fzf
 if [ -f ~/.fzf.zsh ]; then
   [ -z "$HISTFILE" ] && HISTFILE=$HOME/.zsh_history
   HISTSIZE=10000
   SAVEHIST=10000
   source ~/.fzf.zsh
 fi
+
+# tmux
 if [ "$TMUX" = "" ]; then; export TERM="xterm-256color"; fi
+
+# ~/.local/bin
 if [ -d ~/.local/bin ]; then; export PATH="$HOME/.local/bin:$PATH"; fi
+
 export DEFAULT_USER="$USER" # TODO: https://github.com/simnalamburt/shellder/issues/10
 
 # Ruby
@@ -163,4 +174,18 @@ fi
 if [ -d ~/.nodenv ]; then
   export PATH="$HOME/.nodenv/bin:$PATH"
   eval "$(nodenv init -)"
+fi
+
+# ag to rg
+if hash rg 2>/dev/null; then
+  if ! hash ag 2>/dev/null; then
+    alias ag=rg
+  fi
+fi
+
+# open
+if hash gio 2>/dev/null; then
+  alias open='gio open'
+elif hash xdg-open 2>/dev/null; then
+  alias open=xdg-open
 fi
