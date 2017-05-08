@@ -56,6 +56,7 @@ Plug 'racer-rust/vim-racer'
 Plug 'cespare/vim-toml'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
+Plug 'ElmCast/elm-vim'
 
 call plug#end()
 
