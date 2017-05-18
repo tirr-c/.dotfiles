@@ -195,3 +195,12 @@ fi
 if hash pacman 2>/dev/null; then
   alias pkgupdate='sudo pacman -Syu'
 fi
+
+# x-tools
+if [ -d ~/x-tools ]; then
+  TPATH="$PATH"
+  for dir in $(find "$HOME/x-tools" -mindepth 1 -maxdepth 1 -type d); do
+    TPATH="$TPATH:$dir/bin"
+  done
+  export PATH="$TPATH"
+fi
