@@ -190,3 +190,8 @@ if hash gio 2>/dev/null; then
 elif hash xdg-open 2>/dev/null; then
   alias open=xdg-open
 fi
+
+# pacman
+if hash pacman 2>/dev/null; then
+  alias pkgupdate='sudo pacman -Syu'
+fi
