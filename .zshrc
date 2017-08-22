@@ -176,9 +176,13 @@ fi
 
 # open
 if hash gio 2>/dev/null; then
-  alias open='gio open'
+  function open() {
+    gio open $1 >/dev/null 2>&1
+  }
 elif hash xdg-open 2>/dev/null; then
-  alias open=xdg-open
+  function open() {
+    xdg-open $1 >/dev/null 2>&1
+  }
 fi
 
 # pacman
