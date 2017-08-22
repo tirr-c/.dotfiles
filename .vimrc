@@ -18,6 +18,9 @@ set ignorecase smartcase nowrapscan
 
 set pastetoggle=<F8>
 
+set textwidth=80
+set formatoptions-=t
+
 nnoremap ; :
 nnoremap <silent> <C-_> :split<CR>
 nnoremap <silent> <C-\> :vertical split<CR>
@@ -52,11 +55,11 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/seoul256.vim'
 
 Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer'
 Plug 'cespare/vim-toml'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
-Plug 'ElmCast/elm-vim'
+Plug 'leafgarland/typescript-vim'
+Plug 'posva/vim-vue'
 
 call plug#end()
 
@@ -66,12 +69,9 @@ let g:strip_whitespace_on_save = 1
 
 let g:seoul256_background = 233
 colo seoul256
+if v:version >= 703
+  set colorcolumn=+1,+2,+3
+  hi ColorColumn ctermbg=239
+endif
 
 let g:jsx_ext_required = 0
-
-set hidden
-let g:racer_cmd = "$HOME/.cargo/bin/racer"
-au FileType rust nmap gd <Plug>(rust-def)
-au FileType rust nmap gs <Plug>(rust-def-split)
-au FileType rust nmap gx <Plug>(rust-def-vertical)
-au FileType rust nmap <leader>gd <Plug>(rust-doc)
