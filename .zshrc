@@ -120,6 +120,8 @@ if [ "$TMUX" = "" ]; then; export TERM="xterm-256color"; fi
 
 # ~/.local/bin
 if [ -d ~/.local/bin ]; then; export PATH="$HOME/.local/bin:$PATH"; fi
+# ~/.local/lib
+if [ -d ~/.local/lib ]; then; export LD_LIBRARY_PATH="$HOME/.local/lib:$LD_LIBRARY_PATH"; fi
 
 export DEFAULT_USER="$USER" # TODO: https://github.com/simnalamburt/shellder/issues/10
 
