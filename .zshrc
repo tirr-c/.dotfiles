@@ -25,7 +25,6 @@ else
   PS1='%n@%m:%~%# '
 fi
 
-
 #
 # zsh-sensible
 #
@@ -73,6 +72,8 @@ zmodload -i zsh/complist
 # Substring completion
 zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
+
+setopt hist_save_no_dups
 
 #
 # fzy.zsh
