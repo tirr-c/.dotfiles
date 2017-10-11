@@ -151,6 +151,16 @@ if hash racer 2>/dev/null && [ -d ~/ ]; then
   export RUST_SRC_PATH="$HOME/.multirust/toolchains/${RUST_CHANNEL}-${RUST_TARGET}/lib/rustlib/src/rust/src"
 fi
 
+# yarn
+if [ -d ~/.yarn ]; then
+  export PATH="$PATH:$HOME/.yarn/bin"
+fi
+
+# yarn global
+if hash yarn 2>/dev/null; then
+  export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
+fi
+
 # torch
 if [ -d ~/torch/install ]; then
   export PATH="$HOME/torch/install/bin:$PATH"
