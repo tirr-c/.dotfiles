@@ -207,9 +207,9 @@ elif hash pacman 2>/dev/null; then
 fi
 
 # x-tools
-if [ -d /build/x-tools ]; then
+if [ -d ~/x-tools ]; then
   TPATH="$PATH"
-  for dir in $(find "/build/x-tools" -mindepth 1 -maxdepth 1 -type d); do
+  for dir in $(find "$HOME/x-tools" -mindepth 1 -maxdepth 1 -type d); do
     TPATH="$TPATH:$dir/bin"
   done
   export PATH="$TPATH"
