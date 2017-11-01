@@ -214,3 +214,9 @@ if [ -d ~/x-tools ]; then
   done
   export PATH="$TPATH"
 fi
+
+# exa
+if hash exa 2>/dev/null; then
+  alias ls='exa'
+  alias l='exa -la'
+fi
