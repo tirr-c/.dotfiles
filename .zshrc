@@ -198,8 +198,11 @@ elif hash xdg-open 2>/dev/null; then
   }
 fi
 
-# pacman
-if hash pacman 2>/dev/null; then
+# pacman, bauerbill
+if hash bauerbill 2>/dev/null; then
+  alias bb='sudo bauerbill'
+  alias pkgupdate='sudo bauerbill -Syu'
+elif hash pacman 2>/dev/null; then
   alias pkgupdate='sudo pacman -Syu'
 fi
 
