@@ -220,3 +220,9 @@ if hash exa 2>/dev/null; then
   alias ls='exa'
   alias l='exa -la'
 fi
+
+# wttr.in
+wttr() {
+  LOCATION=${1// /+}
+  curl ko.wttr.in/$LOCATION
+}
