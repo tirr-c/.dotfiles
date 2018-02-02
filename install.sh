@@ -19,7 +19,7 @@ done
 
 # zplug/zplug
 echo "Installing zplug"
-curl -sL zplug.sh/installer | zsh
+curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 
 # junegunn/vim-plug
 echo "Installing vim-plug"
