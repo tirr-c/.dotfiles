@@ -8,7 +8,7 @@ set number
 set nowrap
 set startofline
 set scrolloff=3
-set splitbelow
+set splitbelow splitright
 
 set cindent ai si et
 set ts=2 sts=2 sw=2 bs=2
@@ -20,6 +20,11 @@ set pastetoggle=<F8>
 
 set textwidth=80
 set formatoptions-=t
+
+set guioptions-=m
+set guioptions-=T
+set guioptions-=r
+set guioptions-=L
 
 nnoremap ; :
 nnoremap <silent> <C-_> :split<CR>
@@ -44,6 +49,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -63,7 +69,11 @@ Plug 'posva/vim-vue'
 
 call plug#end()
 
+let g:fzf_layout = { 'right': '~50%' }
+nmap <leader><tab> :Files<CR>
+
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
 
 let g:strip_whitespace_on_save = 1
 
