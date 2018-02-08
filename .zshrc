@@ -114,6 +114,11 @@ if [ -f ~/.fzf.zsh ]; then
   HISTSIZE=10000
   SAVEHIST=10000
   source ~/.fzf.zsh
+
+  # Use fd if available
+  if hash fd 2>/dev/null; then
+    export FZF_DEFAULT_COMMAND='fd --type f'
+  fi
 fi
 
 # tmux
