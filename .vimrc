@@ -65,6 +65,7 @@ Plug 'cespare/vim-toml'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 Plug 'posva/vim-vue'
 
 call plug#end()
