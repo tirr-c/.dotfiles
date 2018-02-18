@@ -70,8 +70,22 @@ Plug 'posva/vim-vue'
 
 call plug#end()
 
-let g:fzf_layout = { 'right': '~50%' }
+let g:fzf_layout = { 'right': '~40%' }
 nmap <leader><tab> :Files<CR>
+nmap <leader><leader><tab> :Files!<CR>
+nmap <leader>q :Buffers<CR>
+nmap <leader><leader>q :Buffers!<CR>
+if executable('rg')
+  " From junegunn/fzf.vim#readme
+  command! -bang -nargs=* Rg
+    \ call fzf#vim#grep(
+    \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+    \   <bang>0 ? fzf#vim#with_preview('up:60%')
+    \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+    \   <bang>0)
+  nmap <leader>r :Rg<space>
+  nmap <leader><leader>r :Rg!<space>
+endif
 
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
