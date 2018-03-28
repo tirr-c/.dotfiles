@@ -33,7 +33,7 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 
 # Symlinking
 BASEDIR="$(dirname "$0")"
-DOTFILES=".zshrc .vimrc .tmux.conf .npmrc"
+DOTFILES=".zshrc .vimrc.common .vimrc .ideavimrc .tmux.conf .npmrc"
 for dotfile in $DOTFILES; do
   echo "Symlinking $dotfile"
   ln -sf "$BASEDIR/$dotfile"
