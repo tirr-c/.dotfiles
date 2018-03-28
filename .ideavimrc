@@ -1,0 +1,12 @@
+set hlsearch incsearch showmatch
+set ignorecase smartcase nowrapscan
+
+nnoremap ; :
+nnoremap <silent> <C-_> :action SplitHorizontally<CR>
+nnoremap <silent> <C-\> :action SplitVertically<CR>
+nmap <Leader><Tab> :action GotoFile<CR>
+nmap <Leader>q :action RecentFiles<CR>
+nmap <Leader>r :action FindInPath<CR>
+nmap <Leader><Leader>b :action GotoImplementation<CR>
+nmap <Leader><Leader>r :action FindUsages<CR>
+nmap <Leader><Leader>s :action SelectInProjectView<CR>

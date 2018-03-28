@@ -1,20 +1,9 @@
-set encoding=utf-8
-set fileencoding=utf-8
+source $HOME/.vimrc.common
+
 set shell=/bin/bash
-set nocompatible
-set nobackup noswapfile
-set autoread
-set number
-set nowrap
-set startofline
-set scrolloff=3
-set splitbelow splitright
 
 set cindent ai si et
 set ts=2 sts=2 sw=2 bs=2
-
-set hlsearch incsearch showmatch
-set ignorecase smartcase nowrapscan
 
 set pastetoggle=<F8>
 
@@ -25,14 +14,6 @@ set guioptions-=m
 set guioptions-=T
 set guioptions-=r
 set guioptions-=L
-
-nnoremap ; :
-nnoremap <silent> <C-_> :split<CR>
-nnoremap <silent> <C-\> :vertical split<CR>
-nnoremap <silent> <C-h> :vertical resize -5<CR>
-nnoremap <silent> <C-j> :resize -3<CR>
-nnoremap <silent> <C-k> :resize +3<CR>
-nnoremap <silent> <C-l> :vertical resize +5<CR>
 
 " Persistent history
 " from simnalamburt/.dotfiles
@@ -60,11 +41,15 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/seoul256.vim'
 
+Plug 'Shougo/vimproc.vim', {'do' : 'make'} " for tsuquyomi
+
 Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
 Plug 'pangloss/vim-javascript'
+Plug 'jason0x43/vim-js-indent'
 Plug 'mxw/vim-jsx'
 Plug 'leafgarland/typescript-vim'
+Plug 'Quramy/tsuquyomi'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'posva/vim-vue'
 
@@ -100,3 +85,10 @@ if v:version >= 703
 endif
 
 let g:jsx_ext_required = 0
+let g:xml_syntax_folding = 0
+
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.jsx
+
+autocmd FileType typescript nmap <buffer> <leader>d <Plug>(TsuquyomiDefinition)
+autocmd FileType typescript nmap <buffer> <leader>t <Plug>(TsuquyomiTypeDefinition)
+autocmd FileType typescript nmap <buffer> <leader>r <Plug>(TsuquyomiReferences)
