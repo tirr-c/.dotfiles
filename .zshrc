@@ -20,6 +20,7 @@ if is-at-least 4.3.9 && [ -f ~/.zplug/init.zsh ]; then
   zplug 'zsh-users/zsh-syntax-highlighting'
   zplug 'simnalamburt/cgitc'
   zplug 'simnalamburt/shellder', as:theme
+  export VIRTUAL_ENV_DISABLE_PROMPT=1
   zplug load
 else
   PS1='%n@%m:%~%# '
