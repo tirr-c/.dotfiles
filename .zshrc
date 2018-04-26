@@ -27,6 +27,14 @@ else
 fi
 
 #
+# Terminal title
+#
+
+precmd() {
+  print -Pn "\e]0;%n@%m: %~\a"
+}
+
+#
 # zsh-sensible
 #
 stty stop undef
