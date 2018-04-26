@@ -127,6 +127,14 @@ if [ -f ~/.fzf.zsh ]; then
   # Use fd if available
   if hash fd 2>/dev/null; then
     export FZF_DEFAULT_COMMAND='fd --type f'
+
+    _fzf_compgen_path() {
+      fd --hidden --follow --exclude ".git" . "$1"
+    }
+
+    _fzf_compgen_dir() {
+      fd --type d --hidden --follow --exclude ".git" . "$1"
+    }
   fi
 fi
 
