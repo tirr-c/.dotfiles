@@ -2,13 +2,14 @@ source $HOME/.vimrc.common
 
 set shell=/bin/bash
 
-set cindent ai si et
-set ts=2 sts=2 sw=2 bs=2
-
 set pastetoggle=<F8>
 
 set textwidth=80
 set formatoptions-=t
+
+set cindent ai si et
+set ts=2 sts=2 sw=2 bs=2
+autocmd FileType typescript set ts=4 sts=4 sw=4 tw=120
 
 set guioptions-=m
 set guioptions-=T
