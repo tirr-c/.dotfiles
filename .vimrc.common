@@ -12,6 +12,8 @@ set splitbelow splitright
 set hlsearch incsearch showmatch
 set ignorecase smartcase nowrapscan
 
+set backupcopy=yes
+
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
 
