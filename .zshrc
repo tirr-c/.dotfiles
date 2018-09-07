@@ -242,8 +242,8 @@ fi
 
 # exa
 if hash exa 2>/dev/null; then
-  alias ls='exa'
-  alias l='exa -la'
+  alias ls='exa --group-directories-first'
+  alias l='exa -la --group-directories-first --time-style iso'
 fi
 
 # wttr.in
