@@ -18,6 +18,7 @@ filetype plugin on
 set omnifunc=syntaxcomplete#Complete
 
 nnoremap ; :
+nnoremap ' ;
 nnoremap <silent> <C-_> :split<CR>
 nnoremap <silent> <C-\> :vertical split<CR>
 nnoremap <silent> <C-h> :vertical resize -5<CR>
