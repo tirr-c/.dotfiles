@@ -194,6 +194,9 @@ if [ -d ~/.pyenv ]; then
   export PYENV_ROOT="$HOME/.pyenv"
   export PATH="$HOME/.pyenv/bin:$PATH"
   eval "$(pyenv init -)"
+  if [ -d ${PYENV_ROOT}/plugins/pyenv-virtualenv ]; then
+    eval "$(pyenv virtualenv-init -)"
+  fi
 fi
 
 # nodenv
