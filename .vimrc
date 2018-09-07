@@ -72,6 +72,36 @@ if executable('rg')
   nmap <leader>r :Rg<space>
   nmap <leader><leader>r :Rg!<space>
 endif
+if executable('fd')
+  function! FindPackageRoot(base)
+    let current = fnamemodify(a:base, ':p:h')
+    while empty(glob(current.'/package.json'))
+      if current ==# '/'
+        return ''
+      endif
+      let current = fnamemodify(current, ':h')
+    endwhile
+    return current
+  endfunction
+
+  function! RunDtsFzf(base, bang)
+    let fzf_dict = fzf#wrap(
+      \ 'd-ts',
+      \ {
+      \   'source': "fd -c'always' -e'.d.ts' -tf . 'node_modules/' | cut -d/ -f2-",
+      \   'dir': FindPackageRoot(a:base),
+      \   'options': ['--ansi', '--prompt=node_modules/']
+      \ },
+      \ a:bang)
+    call fzf#run(fzf_dict)
+  endfunction
+  command! -bang Dts
+    \ call RunDtsFzf(execute('pwd'), <bang>0)
+  command! -bang BufferDts
+    \ call RunDtsFzf('%', <bang>0)
+  nmap <leader>d :Dts<cr>
+  nmap <leader><leader>d :Dts!<cr>
+endif
 
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -89,7 +119,3 @@ let g:jsx_ext_required = 0
 let g:xml_syntax_folding = 0
 
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.jsx
-
-autocmd FileType typescript nmap <buffer> <leader>d <Plug>(TsuquyomiDefinition)
-autocmd FileType typescript nmap <buffer> <leader>t <Plug>(TsuquyomiTypeDefinition)
-autocmd FileType typescript nmap <buffer> <leader>r <Plug>(TsuquyomiReferences)
