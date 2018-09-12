@@ -228,15 +228,12 @@ wttr() {
   curl ko.wttr.in/$LOCATION
 }
 
-# vim
-if hash vim 2>/dev/null; then
-  export EDITOR=nvim
-  alias vi='vim'
-fi
-
-# neovim
+# neovim, vim
 if hash nvim 2>/dev/null; then
   export EDITOR=nvim
   alias vim='nvim'
   alias vi='nvim'
+elif hash vim 2>/dev/null; then
+  export EDITOR=vim
+  alias vi='vim'
 fi
