@@ -85,27 +85,6 @@ zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 setopt hist_save_no_dups
 
 #
-# fzy.zsh
-#
-if hash fzy 2>/dev/null; then
-  [ -z "$HISTFILE" ] && HISTFILE=$HOME/.zsh_history
-  HISTSIZE=10000
-  SAVEHIST=10000
-  function fzy-history-widget() {
-    echo
-    setopt localoptions pipefail
-    BUFFER=$(fc -l 1 | perl -pe 's/^\s*\d+\s+/  /' | tac | awk '!a[$0]++' | fzy -l25 --query=$LBUFFER | cut -c3-)
-    CURSOR=$#BUFFER
-    local ret=$?
-    zle reset-prompt
-    return $ret
-  }
-  zle     -N    fzy-history-widget
-  bindkey '^R'  fzy-history-widget
-fi
-
-
-#
 # zshrc
 #
 
