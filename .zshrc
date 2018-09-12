@@ -88,9 +88,6 @@ setopt hist_save_no_dups
 # zshrc
 #
 
-# SOCKS5 proxy alias
-alias arisa-proxy='ssh -D 1080 -C -N -f -q arisa'
-
 # typo alias
 alias sl=ls
 alias ㅣ=l
