@@ -100,6 +100,8 @@ if [ -f ~/.fzf.zsh ]; then
   SAVEHIST=10000
   source ~/.fzf.zsh
 
+  export FZF_COMPLETION_TRIGGER='\\'
+
   # Use fd if available
   if hash fd 2>/dev/null; then
     export FZF_DEFAULT_COMMAND='fd --type f'
