@@ -50,8 +50,8 @@ Plug 'pangloss/vim-javascript'
 Plug 'jason0x43/vim-js-indent'
 Plug 'mxw/vim-jsx'
 Plug 'leafgarland/typescript-vim'
-Plug 'Quramy/tsuquyomi'
 Plug 'peitalin/vim-jsx-typescript'
+Plug 'Quramy/tsuquyomi'
 Plug 'posva/vim-vue'
 
 call plug#end()
@@ -124,4 +124,17 @@ endif
 let g:jsx_ext_required = 0
 let g:xml_syntax_folding = 0
 
-autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.jsx
+" typescript.tsx
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
+
+" dark red
+hi tsxTagName ctermfg=168 guifg=#E06C75
+
+" orange
+hi tsxCloseString ctermfg=210 guifg=#F99575
+hi tsxCloseTag ctermfg=210 guifg=#F99575
+hi tsxAttributeBraces ctermfg=210 guifg=#F99575
+hi tsxEqual ctermfg=210 guifg=#F99575
+
+" yellow
+hi tsxAttrib ctermfg=216 guifg=#F8BD7F cterm=italic
