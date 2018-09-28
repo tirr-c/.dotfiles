@@ -73,8 +73,8 @@ if executable('rg')
   nmap <leader><leader>r :Rg!<space>
 endif
 if executable('fd')
-  function! FindPackageRoot(base)
-    let current = fnamemodify(a:base, ':p:h')
+  function! FindPackageRoot(startdir)
+    let current = fnamemodify(a:startdir, ':p')
     while empty(glob(current.'/package.json'))
       if current ==# '/'
         return ''
@@ -85,20 +85,26 @@ if executable('fd')
   endfunction
 
   function! RunDtsFzf(base, bang)
+    let package_root = FindPackageRoot(a:base)
+    let node_modules_dir = glob(package_root . '/node_modules')
+    if node_modules_dir ==# ''
+      echoerr 'node_modules not found in ' . package_root
+      return
+    endif
     let fzf_dict = fzf#wrap(
       \ 'd-ts',
       \ {
-      \   'source': "fd -c'always' -e'.d.ts' -tf . 'node_modules/' | cut -d/ -f2-",
-      \   'dir': FindPackageRoot(a:base),
+      \   'source': "fd -c'always' -e'.d.ts' -tf",
+      \   'dir': node_modules_dir,
       \   'options': ['--ansi', '--prompt=node_modules/']
       \ },
       \ a:bang)
     call fzf#run(fzf_dict)
   endfunction
   command! -bang Dts
-    \ call RunDtsFzf(execute('pwd'), <bang>0)
+    \ call RunDtsFzf(getcwd(), <bang>0)
   command! -bang BufferDts
-    \ call RunDtsFzf('%', <bang>0)
+    \ call RunDtsFzf(expand('%:p:h'), <bang>0)
   nmap <leader>d :Dts<cr>
   nmap <leader><leader>d :Dts!<cr>
 endif
