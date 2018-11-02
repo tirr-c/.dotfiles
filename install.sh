@@ -2,6 +2,9 @@
 
 set -e
 
+# Locale check
+locale -k LC_CTYPE | grep -qi 'charmap="utf-\+8"' || (echo 'Locale should be UTF-8'; exit 1)
+
 # Dependencies
 DEPS="zsh curl git"
 for dep in $DEPS; do
