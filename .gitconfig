@@ -1,0 +1,5 @@
+[core]
+	editor = nvim
+	excludesfile = /home/tirr/.gitignore-global
+[merge]
+	conflictstyle = diff3
