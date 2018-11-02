@@ -1,10 +1,6 @@
 #!/bin/sh
 
-# Working directory check
-if [ "$(pwd)" != "$HOME" ]; then
-  echo "Run the script at your home directory."
-  exit 1
-fi
+set -e
 
 # Dependencies
 DEPS="zsh curl git"
@@ -38,5 +34,9 @@ BASEDIR="$(dirname "$0")"
 DOTFILES=".zshrc .vimrc.common .vimrc .ideavimrc .tmux.conf .npmrc"
 for dotfile in $DOTFILES; do
   echo "Symlinking $dotfile"
-  ln -sf "$BASEDIR/$dotfile"
+  ln -rsf "$BASEDIR/$dotfile" "~/$dotfile"
 done
+
+echo 'Symlinking Neovim init.vim'
+mkdir -p ~/.config/nvim
+ln -rsf "$BASEDIR/.vimrc" ~/.config/nvim/init.vim
