@@ -9,6 +9,9 @@ umask 022
 # GPG
 export GPG_TTY=`tty`
 
+# Chrome to Chromium
+export CHROME_BIN="$(which chromium)"
+
 #
 # zplug
 #
