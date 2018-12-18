@@ -117,6 +117,17 @@ if [ -f ~/.fzf.zsh ]; then
       fd --type d --hidden --follow --exclude ".git" . "$1"
     }
   fi
+
+  if hash git 2>/dev/null; then
+    gbfzf() {
+      git branch | egrep -v '^\*' | \
+        fzf --ansi \
+        --prompt='git branch> ' \
+        --preview="git log --color=always --decorate --oneline --graph {1} | head -n $LINES"
+    }
+
+    alias gcoz='git checkout $(gbfzf)'
+  fi
 fi
 
 # tmux
