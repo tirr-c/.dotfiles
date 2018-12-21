@@ -94,7 +94,7 @@ if executable('fd')
     let fzf_dict = fzf#wrap(
       \ 'd-ts',
       \ {
-      \   'source': "fd -c'always' -e'.d.ts' -tf",
+      \   'source': "fd --no-ignore -c'always' -e'.d.ts' -tf",
       \   'dir': node_modules_dir,
       \   'options': ['--ansi', '--prompt=node_modules/']
       \ },
