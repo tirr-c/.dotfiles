@@ -28,6 +28,12 @@ if has('persistent_undo')
   set undofile
 endif
 
+" ale
+imap <C-d> <Esc>:ALEGoToDefinition<CR>
+nmap <C-d> :ALEGoToDefinition<CR>
+let g:ale_completion_enabled = 1
+let g:airline#extensions#ale#enabled = 1
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -42,7 +48,8 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/seoul256.vim'
 
-Plug 'Shougo/vimproc.vim', {'do' : 'make'} " for tsuquyomi
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'w0rp/ale'
 
 Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
@@ -51,7 +58,6 @@ Plug 'jason0x43/vim-js-indent'
 Plug 'mxw/vim-jsx'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
-Plug 'Quramy/tsuquyomi'
 Plug 'posva/vim-vue'
 
 call plug#end()
