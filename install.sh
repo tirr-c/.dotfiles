@@ -37,7 +37,7 @@ BASEDIR="$(dirname "$0")"
 DOTFILES=".zshrc .vimrc.common .vimrc .ideavimrc .tmux.conf .npmrc .gitconfig .gitignore-global"
 for dotfile in $DOTFILES; do
   echo "Symlinking $dotfile"
-  ln -rsf "$BASEDIR/$dotfile" "~/$dotfile"
+  ln -rsf "$BASEDIR/$dotfile" "$HOME/$dotfile"
 done
 
 echo 'Symlinking Neovim init.vim'
