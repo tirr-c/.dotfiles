@@ -59,6 +59,7 @@ Plug 'mxw/vim-jsx'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'posva/vim-vue'
+Plug 'hashivim/vim-terraform'
 
 call plug#end()
 
