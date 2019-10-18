@@ -255,3 +255,8 @@ elif hash vim 2>/dev/null; then
   export EDITOR=vim
   alias vi='vim'
 fi
+
+# Load local zshrc
+if [ -f ~/.zshrc.local ]; then
+  source ~/.zshrc.local
+fi
