@@ -28,12 +28,6 @@ if has('persistent_undo')
   set undofile
 endif
 
-" ale
-imap <C-d> <Esc>:ALEGoToDefinition<CR>
-nmap <C-d> :ALEGoToDefinition<CR>
-let g:ale_completion_enabled = 1
-let g:airline#extensions#ale#enabled = 1
-
 call plug#begin('~/.vim/plugged')
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -48,8 +42,23 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/seoul256.vim'
 
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+" deoplete
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
+
+" ale
 Plug 'w0rp/ale'
+imap <C-d> <Esc>:ALEGoToDefinition<CR>
+nmap <C-d> :ALEGoToDefinition<CR>
+let g:ale_completion_enabled = 1
+" autocmd FileType javascript let g:ale_completion_enabled = 0
+let g:airline#extensions#ale#enabled = 1
 
 Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
