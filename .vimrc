@@ -42,23 +42,19 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/seoul256.vim'
 
-" deoplete
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-let g:deoplete#enable_at_startup = 1
-
-" ale
-Plug 'w0rp/ale'
-imap <C-d> <Esc>:ALEGoToDefinition<CR>
-nmap <C-d> :ALEGoToDefinition<CR>
-let g:ale_completion_enabled = 1
-" autocmd FileType javascript let g:ale_completion_enabled = 0
-let g:airline#extensions#ale#enabled = 1
+" coc.nvim
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+set hidden
+set updatetime=300
+set shortmess+=c
+inoremap <silent><expr> <C-space> coc#refresh()
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
+nmap <C-d> <Plug>(coc-definition)
 
 Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
@@ -154,3 +150,6 @@ hi tsxEqual ctermfg=210 guifg=#F99575
 
 " yellow
 hi tsxAttrib ctermfg=216 guifg=#F8BD7F cterm=italic
+
+" popup menu
+hi Pmenu ctermbg=236 ctermfg=252 guibg=#3f3f3f guifg=#d9d9d9
