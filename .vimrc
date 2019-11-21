@@ -54,11 +54,29 @@ inoremap <silent><expr> <Tab>
   \ <SID>check_back_space() ? "\<Tab>" :
   \ coc#refresh()
 inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
-nmap <C-d> <Plug>(coc-definition)
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1] =~# '\s'
 endfunction
+
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> gd <Plug>(coc-definition)
+
+nmap <leader>ff <Plug>(coc-fix-current)
+
+nmap <leader><leader>f <Plug>(coc-format)
+augroup mygroup
+  autocmd!
+  autocmd FileType javascript,typescript,typescript.tsx,rust,json
+        \ setl formatexpr=CocAction('formatSelected')
+augroup end
+
+nmap <leader>a <Plug>(coc-codeaction-selected)
+xmap <leader>a <Plug>(coc-codeaction-selected)
+nmap <leader><leader>a <Plug>(coc-codeaction)
+
+nmap <leader>rn <Plug>(coc-rename)
 
 Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
@@ -69,6 +87,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'posva/vim-vue'
 Plug 'hashivim/vim-terraform'
+Plug 'digitaltoad/vim-pug'
 
 call plug#end()
 
@@ -85,8 +104,6 @@ if executable('rg')
     \   <bang>0 ? fzf#vim#with_preview('up:60%')
     \           : fzf#vim#with_preview('right:50%:hidden', '?'),
     \   <bang>0)
-  nmap <leader>r :Rg<space>
-  nmap <leader><leader>r :Rg!<space>
 endif
 if executable('fd')
   function! FindPackageRoot(startdir)
