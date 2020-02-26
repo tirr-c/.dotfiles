@@ -149,6 +149,7 @@ let g:strip_whitespace_on_save = 1
 
 let g:seoul256_background = 233
 colo seoul256
+hi Normal ctermbg=NONE
 if v:version >= 703
   set colorcolumn=+1,+2,+3
   hi ColorColumn ctermbg=239
@@ -173,5 +174,4 @@ hi tsxEqual ctermfg=210 guifg=#F99575
 hi tsxAttrib ctermfg=216 guifg=#F8BD7F cterm=italic
 
 " popup menu
-hi Pmenu ctermbg=236 ctermfg=252 guibg=#3f3f3f guifg=#d9d9d9
-hi CocFloating ctermbg=236 guibg=#3f3f3f
+hi Pmenu ctermbg=16 ctermfg=252 guibg=#000000 guifg=#d9d9d9
