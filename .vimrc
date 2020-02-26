@@ -174,3 +174,4 @@ hi tsxAttrib ctermfg=216 guifg=#F8BD7F cterm=italic
 
 " popup menu
 hi Pmenu ctermbg=236 ctermfg=252 guibg=#3f3f3f guifg=#d9d9d9
+hi CocFloating ctermbg=236 guibg=#3f3f3f
