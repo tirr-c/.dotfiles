@@ -3,6 +3,16 @@
 # If not running interactively, don't do anything
 [[ -o interactive ]] || return
 
+# Disable undef
+stty stop undef
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # WSL: Why do I need this?
 umask 022
 
@@ -16,23 +26,36 @@ export CHROME_BIN="$(which chromium)"
 # zplug
 #
 autoload -U is-at-least
-if is-at-least 4.3.9 && [ -f ~/.zplug/init.zsh ]; then
-  source ~/.zplug/init.zsh
-  zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-  zplug 'zsh-users/zsh-completions'
-  zplug 'zsh-users/zsh-syntax-highlighting'
-  zplug 'simnalamburt/cgitc'
-  zplug 'simnalamburt/shellder', as:theme
-  export VIRTUAL_ENV_DISABLE_PROMPT=1
-  zplug load
+if is-at-least 5.1 && [ -d ~/.zinit ]; then
+  source ~/.zinit/bin/zinit.zsh
+  autoload -Uz _zinit
+  (( ${+_comps} )) && _comps[zinit]=_zinit
+
+  zinit ice depth=1
+  zinit light romkatv/powerlevel10k
+
+  zinit light zsh-users/zsh-completions
+  zinit light zdharma/fast-syntax-highlighting
+  zinit light simnalamburt/cgitc
+
+  autoload -Uz compinit
+  compinit
+  zinit cdreplay
 else
   PS1='%n@%m:%~%# '
+  autoload -Uz compinit
+  compinit
 fi
+
+#
+# powerlevel10k
+#
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 #
 # Terminal title
 #
-
 precmd() {
   print -Pn "\e]0;%n@%m: %~\a"
 }
@@ -40,38 +63,21 @@ precmd() {
 #
 # zsh-sensible
 #
-stty stop undef
-
 alias l='ls -lah'
 alias mv='mv -i'
 alias cp='cp -i'
 
-setopt auto_cd
+setopt auto_cd histignorealldups sharehistory
 zstyle ':completion:*' menu select
-
 
 #
 # lscolors
 #
 autoload -U colors && colors
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-
-# Find the option for using colors in ls, depending on the version: Linux or BSD
-if [[ "$(uname -s)" == "NetBSD" ]]; then
-  # On NetBSD, test if "gls" (GNU ls) is installed (this one supports colors);
-  # otherwise, leave ls as is, because NetBSD's ls doesn't support -G
-  gls --color -d . &>/dev/null 2>&1 && alias ls='gls --color=tty'
-elif [[ "$(uname -s)" == "OpenBSD" ]]; then
-  # On OpenBSD, "gls" (ls from GNU coreutils) and "colorls" (ls from base,
-  # with color and multibyte support) are available from ports.  "colorls"
-  # will be installed on purpose and can't be pulled in by installing
-  # coreutils, so prefer it to "gls".
-  gls --color -d . &>/dev/null 2>&1 && alias ls='gls --color=tty'
-  colorls -G -d . &>/dev/null 2>&1 && alias ls='colorls -G'
-else
-  ls --color -d . &>/dev/null 2>&1 && alias ls='ls --color=tty' || alias ls='ls -G'
-fi
-
+export LSCOLORS="Gxfxcxdxbxegedxbagxcad"
+export LS_COLORS="di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=0;41:sg=30;46:tw=0;42:ow=30;43"
+export TIME_STYLE='long-iso'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
 #
 # zsh-substring-completion
@@ -83,9 +89,6 @@ zmodload -i zsh/complist
 
 # Substring completion
 zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-
-
-setopt hist_save_no_dups
 
 #
 # zshrc
@@ -138,8 +141,6 @@ if [ -d ~/.local/bin ]; then; export PATH="$HOME/.local/bin:$PATH"; fi
 # ~/.local/lib
 if [ -d ~/.local/lib ]; then; export LD_LIBRARY_PATH="$HOME/.local/lib:$LD_LIBRARY_PATH"; fi
 
-export DEFAULT_USER="$USER" # TODO: https://github.com/simnalamburt/shellder/issues/10
-
 # Ruby
 if hash ruby 2>/dev/null && hash gem 2>/dev/null; then
   export GEM_HOME=$(ruby -e 'print Gem.user_dir')
@@ -156,13 +157,6 @@ fi
 # cargo install
 if [ -d ~/.cargo/bin ]; then
   export PATH="$PATH:$HOME/.cargo/bin"
-fi
-
-# racer
-RUST_CHANNEL=stable
-RUST_TARGET=x86_64-unknown-linux-gnu
-if hash racer 2>/dev/null && [ -d ~/ ]; then
-  export RUST_SRC_PATH="$HOME/.multirust/toolchains/${RUST_CHANNEL}-${RUST_TARGET}/lib/rustlib/src/rust/src"
 fi
 
 # yarn
@@ -199,13 +193,6 @@ if [ -d ~/.nodenv ]; then
   eval "$(nodenv init -)"
 fi
 
-# ag to rg
-if hash rg 2>/dev/null; then
-  if ! hash ag 2>/dev/null; then
-    alias ag=rg
-  fi
-fi
-
 # open
 if hash gio 2>/dev/null; then
   function open() {
@@ -215,14 +202,6 @@ elif hash xdg-open 2>/dev/null; then
   function open() {
     xdg-open $1 >/dev/null 2>&1
   }
-fi
-
-# pacman, bauerbill
-if hash bauerbill 2>/dev/null; then
-  alias bb='sudo bauerbill'
-  alias pkgupdate='sudo bauerbill -Syu'
-elif hash pacman 2>/dev/null; then
-  alias pkgupdate='sudo pacman -Syu'
 fi
 
 # x-tools

@@ -1,6 +1,5 @@
 #!/bin/sh
-
-set -e
+set -euo pipefail
 
 # Locale check
 locale -k LC_CTYPE | grep -qi 'charmap="utf-\+8"' || (echo 'Locale should be UTF-8'; exit 1)
@@ -16,9 +15,9 @@ for dep in $DEPS; do
   fi
 done
 
-# zplug/zplug
-echo "Installing zplug"
-curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+# zdharma/zinit
+echo "Installing zinit"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
 
 # junegunn/vim-plug
 echo "Installing vim-plug"
@@ -34,7 +33,7 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 
 # Symlinking
 BASEDIR="$(dirname "$0")"
-DOTFILES=".zshrc .vimrc.common .vimrc .ideavimrc .tmux.conf .npmrc .gitconfig .gitignore-global"
+DOTFILES=".zshrc .p10k.zsh .vimrc.common .vimrc .ideavimrc .tmux.conf .npmrc .gitconfig .gitignore-global"
 for dotfile in $DOTFILES; do
   echo "Symlinking $dotfile"
   ln -rsf "$BASEDIR/$dotfile" "$HOME/$dotfile"
