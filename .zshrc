@@ -123,13 +123,16 @@ if [ -f ~/.fzf.zsh ]; then
 
   if hash git 2>/dev/null; then
     gbfzf() {
-      git branch | egrep -v '^\*' | \
+      git branch | egrep -v '^\*' | sed -e 's/^ *//' | \
         fzf --ansi \
         --prompt='git branch> ' \
         --preview="git log --color=always --decorate --oneline --graph {1} | head -n $LINES"
     }
 
-    alias gcoz='git checkout $(gbfzf)'
+    gcoz() {
+      local branch="$(gbfzf)"
+      git checkout "$branch"
+    }
   fi
 fi
 
