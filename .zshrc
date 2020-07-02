@@ -98,6 +98,8 @@ zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 alias sl=ls
 alias ㅣ=l
 alias 니=ls
+alias ㅣㄴ=ls
+alias ㄴㅣ=ls
 
 # fzf
 if [ -f ~/.fzf.zsh ]; then
