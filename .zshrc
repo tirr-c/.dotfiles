@@ -225,7 +225,7 @@ fi
 # wttr.in
 wttr() {
   LOCATION=${1// /+}
-  curl ko.wttr.in/$LOCATION
+  curl v2.wttr.in/$LOCATION
 }
 
 # neovim, vim
