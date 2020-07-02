@@ -23,7 +23,7 @@ export GPG_TTY=`tty`
 export CHROME_BIN="$(which chromium)"
 
 #
-# zplug
+# zinit
 #
 autoload -U is-at-least
 if is-at-least 5.1 && [ -d ~/.zinit ]; then
