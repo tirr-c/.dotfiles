@@ -207,6 +207,6 @@ hi tsxEqual ctermfg=210 guifg=#F99575
 hi tsxAttrib ctermfg=216 guifg=#F8BD7F cterm=italic
 
 " popup menu
-hi CocFloating ctermbg=235 ctermfg=252 guibg=#262626 guifg=#d9d9d9
-hi NormalFloat ctermbg=235 ctermfg=252 guibg=#262626 guifg=#d9d9d9
+hi CocFloating ctermbg=235 guibg=#262626
+hi NormalFloat ctermbg=235 guibg=#262626
 hi Pmenu ctermbg=235 ctermfg=252 guibg=#262626 guifg=#d9d9d9
