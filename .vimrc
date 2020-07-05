@@ -1,8 +1,16 @@
-source $HOME/.vimrc.common
+set encoding=utf-8
+set fileencoding=utf-8
+set nocompatible
+set nobackup noswapfile
+set autoread
+set number
+set nowrap
+set startofline
+set scrolloff=3
+set splitbelow splitright
 
-set shell=/bin/bash
-
-set pastetoggle=<F8>
+set hlsearch incsearch showmatch
+set ignorecase smartcase nowrapscan
 
 set textwidth=80
 set formatoptions-=t
@@ -10,10 +18,36 @@ set formatoptions-=t
 set cindent ai si et
 set ts=2 sts=2 sw=2 bs=2
 
+set hidden
+
+set shell=/bin/bash
+
+set backupcopy=yes
+
+set pastetoggle=<F8>
+
 set guioptions-=m
 set guioptions-=T
 set guioptions-=r
 set guioptions-=L
+
+filetype plugin on
+
+nnoremap ; :
+nnoremap ' ;
+nnoremap <silent> <C-_> :split<CR>
+nnoremap <silent> <C-\> :vertical split<CR>
+nnoremap <silent> <C-h> :vertical resize -5<CR>
+nnoremap <silent> <C-j> :resize -3<CR>
+nnoremap <silent> <C-k> :resize +3<CR>
+nnoremap <silent> <C-l> :vertical resize +5<CR>
+
+nnoremap <silent> <tab><tab> :b#<CR>
+nnoremap <silent> <tab>w <C-w><C-w>
+nnoremap <silent> <tab>h <C-w><C-h>
+nnoremap <silent> <tab>j <C-w><C-j>
+nnoremap <silent> <tab>k <C-w><C-k>
+nnoremap <silent> <tab>l <C-w><C-l>
 
 " Persistent history
 " from simnalamburt/.dotfiles
@@ -173,4 +207,6 @@ hi tsxEqual ctermfg=210 guifg=#F99575
 hi tsxAttrib ctermfg=216 guifg=#F8BD7F cterm=italic
 
 " popup menu
-hi Pmenu ctermbg=16 ctermfg=252 guibg=#000000 guifg=#d9d9d9
+hi CocFloating ctermbg=235 ctermfg=252 guibg=#262626 guifg=#d9d9d9
+hi NormalFloat ctermbg=235 ctermfg=252 guibg=#262626 guifg=#d9d9d9
+hi Pmenu ctermbg=235 ctermfg=252 guibg=#262626 guifg=#d9d9d9
