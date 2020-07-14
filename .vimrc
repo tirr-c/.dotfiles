@@ -26,6 +26,7 @@ set backupcopy=yes
 
 set pastetoggle=<F8>
 
+set termguicolors
 set guioptions-=m
 set guioptions-=T
 set guioptions-=r
@@ -100,9 +101,10 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
 
-nmap <leader>ff <Plug>(coc-fix-current)
+nmap <leader>fx <Plug>(coc-fix-current)
 
-nmap <leader><leader>f <Plug>(coc-format)
+nmap <leader>ff <Plug>(coc-format)
+xmap <leader>ff <Plug>(coc-format-selected)
 augroup mygroup
   autocmd!
   autocmd FileType javascript,typescript,typescript.tsx,rust,json
@@ -110,8 +112,8 @@ augroup mygroup
 augroup end
 
 nmap <leader>a <Plug>(coc-codeaction-selected)
-xmap <leader>a <Plug>(coc-codeaction-selected)
-nmap <leader><leader>a <Plug>(coc-codeaction)
+nmap <leader>ac <Plug>(coc-codeaction)
+xmap <leader>ac <Plug>(coc-codeaction-selected)
 
 nmap <leader>rn <Plug>(coc-rename)
 
@@ -187,10 +189,10 @@ let g:strip_whitespace_on_save = 1
 
 let g:seoul256_background = 233
 colo seoul256
-hi Normal ctermbg=NONE
+hi Normal ctermbg=NONE guibg=NONE
 if v:version >= 703
   set colorcolumn=+1,+2,+3
-  hi ColorColumn ctermbg=239
+  hi ColorColumn ctermbg=239 guibg=#4e4e4e
 endif
 
 let g:jsx_ext_required = 0
@@ -211,7 +213,12 @@ hi tsxEqual ctermfg=210 guifg=#F99575
 " yellow
 hi tsxAttrib ctermfg=216 guifg=#F8BD7F cterm=italic
 
-" popup menu
-hi CocFloating ctermbg=235 guibg=#262626
+" coc.nvim
 hi NormalFloat ctermbg=235 guibg=#262626
 hi Pmenu ctermbg=235 ctermfg=252 guibg=#262626 guifg=#d9d9d9
+hi CocFloating ctermbg=235 guibg=#262626
+hi CocErrorSign guifg=#d75f87
+hi CocWarningSign guifg=#d8af5f
+hi CocInfoSign guifg=#ffd787
+hi CocHintSign guifg=#add4fb
+hi CocCodeLens guifg=#d0d0d0
