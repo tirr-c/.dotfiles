@@ -77,6 +77,10 @@ Plug 'junegunn/seoul256.vim'
 
 " coc.nvim
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'neoclide/coc-tsserver', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'neoclide/coc-json', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'fannheyward/coc-rust-analyzer', { 'do': 'yarn install --frozen-lockfile' }
+
 set hidden
 set updatetime=300
 set shortmess+=c

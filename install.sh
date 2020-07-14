@@ -42,3 +42,7 @@ done
 echo 'Symlinking Neovim init.vim'
 mkdir -p ~/.config/nvim
 ln -rsf "$BASEDIR/.vimrc" ~/.config/nvim/init.vim
+
+echo 'Symlinking coc-settings.json'
+mkdir -p ~/.config/nvim
+ln -rsf "$BASEDIR/coc-settings.json" ~/.config/nvim/coc-settings.json
