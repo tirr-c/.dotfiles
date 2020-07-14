@@ -80,6 +80,7 @@ Plug 'junegunn/seoul256.vim'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'neoclide/coc-tsserver', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-json', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'neoclide/coc-highlight', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'fannheyward/coc-rust-analyzer', { 'do': 'yarn install --frozen-lockfile' }
 
 set hidden
@@ -107,6 +108,7 @@ nmap <leader>ff <Plug>(coc-format)
 xmap <leader>ff <Plug>(coc-format-selected)
 augroup mygroup
   autocmd!
+  autocmd CursorHold * silent call CocActionAsync('highlight')
   autocmd FileType javascript,typescript,typescript.tsx,rust,json
         \ setl formatexpr=CocAction('formatSelected')
 augroup end
@@ -217,6 +219,7 @@ hi tsxAttrib ctermfg=216 guifg=#F8BD7F cterm=italic
 hi NormalFloat ctermbg=235 guibg=#262626
 hi Pmenu ctermbg=235 ctermfg=252 guibg=#262626 guifg=#d9d9d9
 hi CocFloating ctermbg=235 guibg=#262626
+hi CocHighlightText ctermbg=240 guibg=#585858
 hi CocErrorSign guifg=#d75f87
 hi CocWarningSign guifg=#d8af5f
 hi CocInfoSign guifg=#ffd787
