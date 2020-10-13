@@ -39,6 +39,10 @@ for dotfile in $DOTFILES; do
   ln -rsf "$BASEDIR/$dotfile" "$HOME/$dotfile"
 done
 
+echo 'Symlinking htoprc'
+mkdir -p ~/.config/htop
+ln -rsf "$BASEDIR/htoprc" ~/.config/htop/htoprc
+
 echo 'Symlinking Neovim init.vim'
 mkdir -p ~/.config/nvim
 ln -rsf "$BASEDIR/.vimrc" ~/.config/nvim/init.vim
