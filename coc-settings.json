@@ -1,4 +1,5 @@
 {
+  "diagnostic.warningSign": ">>",
   "rust-analyzer.cargo.loadOutDirsFromCheck": true,
   "rust-analyzer.procMacro.enable": true
 }
