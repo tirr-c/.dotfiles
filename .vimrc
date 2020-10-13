@@ -82,6 +82,7 @@ Plug 'neoclide/coc-tsserver', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-json', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-highlight', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'fannheyward/coc-rust-analyzer', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'clangd/coc-clangd', { 'do': 'yarn install --frozen-lockfile' }
 
 set hidden
 set updatetime=300
