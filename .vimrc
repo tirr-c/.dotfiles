@@ -83,6 +83,7 @@ Plug 'neoclide/coc-json', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-highlight', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'fannheyward/coc-rust-analyzer', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'clangd/coc-clangd', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'neoclide/coc-java', { 'do': 'yarn install --frozen-lockfile' }
 
 set hidden
 set updatetime=300
@@ -124,7 +125,6 @@ Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
 Plug 'pangloss/vim-javascript'
 Plug 'jason0x43/vim-js-indent'
-Plug 'mxw/vim-jsx'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'posva/vim-vue'
@@ -194,7 +194,7 @@ let g:jsx_ext_required = 0
 let g:xml_syntax_folding = 0
 
 " typescript.tsx
-autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
 
 " colors
 " rgb_map from seoul256.vim
