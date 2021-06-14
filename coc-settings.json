@@ -1,5 +1,12 @@
 {
   "diagnostic.warningSign": ">>",
   "rust-analyzer.cargo.loadOutDirsFromCheck": true,
-  "rust-analyzer.procMacro.enable": true
+  "rust-analyzer.procMacro.enable": true,
+  "languageserver": {
+    "ocaml-lsp": {
+      "command": "opam",
+      "args": ["config", "exec", "--", "ocamllsp"],
+      "filetypes": ["ocaml", "reason"]
+    }
+  }
 }
