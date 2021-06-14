@@ -199,6 +199,11 @@ if [ -d ~/.nodenv ]; then
   eval "$(nodenv init -)"
 fi
 
+# opam
+if [ -r /home/tirr/.opam/opam-init/init.zsh ]; then
+  . /home/tirr/.opam/opam-init/init.zsh > /dev/null 2> /dev/null
+fi
+
 # open
 if hash gio 2>/dev/null; then
   function open() {
