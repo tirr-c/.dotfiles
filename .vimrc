@@ -116,7 +116,7 @@ augroup mygroup
 augroup end
 
 nmap <leader>a <Plug>(coc-codeaction-selected)
-nmap <leader>ac <Plug>(coc-codeaction)
+nmap <leader>ac :CocAction<CR>
 xmap <leader>ac <Plug>(coc-codeaction-selected)
 
 nmap <leader>rn <Plug>(coc-rename)
