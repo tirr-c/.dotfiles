@@ -12,7 +12,7 @@ set splitbelow splitright
 set hlsearch incsearch showmatch
 set ignorecase smartcase nowrapscan
 
-set textwidth=80
+set textwidth=100
 set formatoptions-=t
 
 set cindent ai si et
