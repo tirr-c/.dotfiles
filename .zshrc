@@ -66,6 +66,7 @@ precmd() {
 alias l='ls -lah'
 alias mv='mv -i'
 alias cp='cp -i'
+alias less='less -SR'
 
 setopt auto_cd histignorealldups sharehistory
 zstyle ':completion:*' menu select
