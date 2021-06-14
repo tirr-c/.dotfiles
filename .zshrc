@@ -17,7 +17,7 @@ fi
 umask 022
 
 # GPG
-export GPG_TTY=`tty`
+export GPG_TTY="$(tty)"
 
 # Chrome to Chromium
 export CHROME_BIN="$(which chromium)"
@@ -139,8 +139,9 @@ if [ -f ~/.fzf.zsh ]; then
   fi
 fi
 
-# tmux
-if [ "$TMUX" = "" ]; then; export TERM="xterm-256color"; fi
+# term
+# if [ "$TMUX" = "" ]; then; export TERM="xterm-256color"; fi
+export TERM="xterm-256color"
 
 # ~/.local/bin
 if [ -d ~/.local/bin ]; then; export PATH="$HOME/.local/bin:$PATH"; fi
@@ -173,12 +174,6 @@ fi
 # yarn global
 if hash yarn 2>/dev/null; then
   export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
-fi
-
-# torch
-if [ -d ~/torch/install ]; then
-  export PATH="$HOME/torch/install/bin:$PATH"
-  export LD_LIBRARY_PATH="$HOME/torch/install/lib:$LD_LIBRARY_PATH"
 fi
 
 # pyenv
