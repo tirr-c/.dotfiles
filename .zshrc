@@ -194,6 +194,12 @@ if [ -d ~/.nodenv ]; then
   eval "$(nodenv init -)"
 fi
 
+# deno
+if [ -d ~/.deno ]; then
+  export DENO_INSTALL="$HOME/.deno/"
+  export PATH="$DENO_INSTALL/bin:$PATH"
+fi
+
 # opam
 if [ -r /home/tirr/.opam/opam-init/init.zsh ]; then
   . /home/tirr/.opam/opam-init/init.zsh > /dev/null 2> /dev/null
