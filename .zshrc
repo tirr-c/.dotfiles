@@ -182,7 +182,7 @@ if [ -d ~/.pyenv ]; then
   export PATH="$HOME/.pyenv/bin:$PATH"
 fi
 if hash pyenv 2>/dev/null; then
-  eval "$(pyenv init -)"
+  eval "$(pyenv init --path)"
   if hash pyenv-virtualenv-init 2>/dev/null; then
     eval "$(pyenv virtualenv-init -)"
   fi
