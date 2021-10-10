@@ -111,7 +111,7 @@ xmap <leader>ff <Plug>(coc-format-selected)
 augroup mygroup
   autocmd!
   autocmd CursorHold * silent call CocActionAsync('highlight')
-  autocmd FileType javascript,typescript,typescript.tsx,rust,json
+  autocmd FileType javascript,typescript,typescriptreact,rust,json
         \ setl formatexpr=CocAction('formatSelected')
 augroup end
 
