@@ -35,7 +35,7 @@ if is-at-least 5.1 && [ -d ~/.zinit ]; then
   zinit light romkatv/powerlevel10k
 
   zinit light zsh-users/zsh-completions
-  zinit light zdharma/fast-syntax-highlighting
+  zinit light zdharma-continuum/fast-syntax-highlighting
   zinit light simnalamburt/cgitc
 
   autoload -Uz compinit
