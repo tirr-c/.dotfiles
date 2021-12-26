@@ -6,6 +6,9 @@
 # Disable undef
 stty stop undef
 
+# GPG
+export GPG_TTY="$(tty)"
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -15,9 +18,6 @@ fi
 
 # WSL: Why do I need this?
 umask 022
-
-# GPG
-export GPG_TTY="$(tty)"
 
 # Chrome to Chromium
 export CHROME_BIN="$(which chromium)"
