@@ -1,7 +1,6 @@
 {
   "diagnostic.warningSign": ">>",
-  "rust-analyzer.cargo.loadOutDirsFromCheck": true,
-  "rust-analyzer.procMacro.enable": true,
+  "rust-analyzer.checkOnSave.command": "clippy",
   "languageserver": {
     "ocaml-lsp": {
       "command": "opam",
