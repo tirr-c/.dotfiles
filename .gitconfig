@@ -7,3 +7,7 @@
 	tool = vimdiff
 [init]
 	defaultBranch = main
+[user]
+	signingKey = ~/.ssh/id_ed25519.pub
+[gpg]
+	format = ssh
