@@ -233,7 +233,7 @@ fi
 # exa
 if hash exa 2>/dev/null; then
   alias ls='exa --group-directories-first --color=always'
-  alias l='exa -la --group-directories-first --time-style iso --color=always'
+  alias l='exa -lab --group-directories-first --time-style iso --color=always'
 fi
 
 # wttr.in
