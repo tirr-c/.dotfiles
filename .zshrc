@@ -25,9 +25,14 @@ export CHROME_BIN="$(which chromium)"
 #
 # zinit
 #
-autoload -U is-at-least
-if is-at-least 5.1 && [ -d ~/.zinit ]; then
-  source ~/.zinit/bin/zinit.zsh
+if [[ -d "${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git" ]]; then
+  ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+elif [[ -d ~/.zinit ]]; then
+  ZINIT_HOME=~/.zinit/bin
+fi
+
+if [[ -v ZINIT_HOME ]]; then
+  source "${ZINIT_HOME}/zinit.zsh"
   autoload -Uz _zinit
   (( ${+_comps} )) && _comps[zinit]=_zinit
 

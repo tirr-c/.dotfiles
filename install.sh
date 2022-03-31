@@ -17,7 +17,7 @@ done
 
 # zdharma/zinit
 echo "Installing zinit"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma-continuum/zinit/master/doc/install.sh)"
+sh -c "$(curl -fsSL https://git.io/zinit-install)"
 
 # junegunn/vim-plug
 echo "Installing vim-plug"
