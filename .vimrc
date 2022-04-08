@@ -20,7 +20,9 @@ set ts=2 sts=2 sw=2 bs=2
 
 set hidden
 
-set shell=/bin/bash
+if &shell !~# '\(/\(zsh\|bash\|sh\)\|\\\\cmd\.exe\)$'
+  set shell=/bin/bash
+endif
 
 set backupcopy=yes
 
@@ -89,20 +91,21 @@ Plug 'fannheyward/coc-rust-analyzer', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'clangd/coc-clangd', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-java', { 'do': 'yarn install --frozen-lockfile' }
 
-set hidden
 set updatetime=300
 set shortmess+=c
-inoremap <silent><expr> <C-space> coc#refresh()
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <silent><expr> <Tab>
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<Tab>" :
-  \ coc#refresh()
-inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
+
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1] =~# '\s'
 endfunction
+" ^<Space> opens completion menu
+inoremap <silent><expr> <C-space> coc#refresh()
+" When completion menu is open, <CR> executes the menu item
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" - When completion menu is open, <Tab> selects the next menu item
+inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" When completion menu is open, Shift<Tab> selects the previous menu item
+inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
@@ -112,7 +115,7 @@ nmap <leader>fx <Plug>(coc-fix-current)
 
 nmap <leader>ff <Plug>(coc-format)
 xmap <leader>ff <Plug>(coc-format-selected)
-augroup mygroup
+augroup cocsettings
   autocmd!
   autocmd CursorHold * silent call CocActionAsync('highlight')
   autocmd FileType javascript,typescript,typescriptreact,rust,json
@@ -125,6 +128,7 @@ xmap <leader>ac <Plug>(coc-codeaction-selected)
 
 nmap <leader>rn <Plug>(coc-rename)
 
+" language plugins
 Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
 Plug 'pangloss/vim-javascript'
@@ -151,42 +155,6 @@ if executable('rg')
     \           : fzf#vim#with_preview('right:50%:hidden', '?'),
     \   <bang>0)
 endif
-if executable('fd')
-  function! FindPackageRoot(startdir)
-    let current = fnamemodify(a:startdir, ':p')
-    while empty(glob(current.'/package.json'))
-      if current ==# '/'
-        return ''
-      endif
-      let current = fnamemodify(current, ':h')
-    endwhile
-    return current
-  endfunction
-
-  function! RunDtsFzf(base, bang)
-    let package_root = FindPackageRoot(a:base)
-    let node_modules_dir = glob(package_root . '/node_modules')
-    if node_modules_dir ==# ''
-      echoerr 'node_modules not found in ' . package_root
-      return
-    endif
-    let fzf_dict = fzf#wrap(
-      \ 'd-ts',
-      \ {
-      \   'source': "fd --no-ignore -c'always' -e'.d.ts' -tf",
-      \   'dir': node_modules_dir,
-      \   'options': ['--ansi', '--prompt=node_modules/']
-      \ },
-      \ a:bang)
-    call fzf#run(fzf_dict)
-  endfunction
-  command! -bang Dts
-    \ call RunDtsFzf(getcwd(), <bang>0)
-  command! -bang BufferDts
-    \ call RunDtsFzf(expand('%:p:h'), <bang>0)
-  nmap <leader>d :Dts<cr>
-  nmap <leader><leader>d :Dts!<cr>
-endif
 
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -198,7 +166,23 @@ let g:jsx_ext_required = 0
 let g:xml_syntax_folding = 0
 
 " typescript.tsx
-autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
+augroup tsfiletype
+  autocmd!
+  autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
+augroup end
+
+" Terminals
+tnoremap <C-j><C-k> <C-\><C-n>
+augroup terminals
+  autocmd!
+  " No line number for terminal buffers
+  autocmd TermOpen * setlocal nonumber
+  " Automatically enter terminal mode
+  autocmd TermOpen *sh,*cmd.exe startinsert
+  " Close terminal buffer if exit code is 0
+  autocmd TermClose *sh,*cmd.exe if !v:event.status | exe 'bdelete! '..expand('<abuf>') | endif
+augroup end
+
 
 " colors
 " rgb_map from seoul256.vim
