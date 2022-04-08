@@ -62,6 +62,10 @@ if has('persistent_undo')
   set undofile
 endif
 
+" Terminal title
+set title
+let &titlestring = '[' . $USER . '@' . hostname() . '] %f%( %m%)'
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
