@@ -201,8 +201,8 @@ if [[ -d ~/.deno ]]; then
 fi
 
 # opam
-if [[ -r /home/tirr/.opam/opam-init/init.zsh ]]; then
-  . /home/tirr/.opam/opam-init/init.zsh >/dev/null 2>&1
+if [[ -r ~/.opam/opam-init/init.zsh ]]; then
+  . ~/.opam/opam-init/init.zsh >/dev/null 2>&1
 fi
 
 # open
