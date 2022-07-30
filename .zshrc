@@ -105,7 +105,7 @@ alias ㄴㅣ=ls
 
 # fzf
 if [[ -f ~/.fzf.zsh ]]; then
-  [[ -z "$HISTFILE" ]] && HISTFILE=$HOME/.zsh_history
+  [[ -n "$HISTFILE" ]] || HISTFILE="$HOME/.zsh_history"
   HISTSIZE=10000
   SAVEHIST=10000
   source ~/.fzf.zsh
