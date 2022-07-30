@@ -132,7 +132,6 @@ nmap <leader>rn <Plug>(coc-rename)
 Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
 Plug 'pangloss/vim-javascript'
-Plug 'jason0x43/vim-js-indent'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'posva/vim-vue'
