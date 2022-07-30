@@ -1,6 +1,6 @@
 [core]
 	editor = nvim
-	excludesfile = ~/.gitignore-global
+	excludesfile = ~/.gitexclude
 [merge]
 	conflictstyle = diff3
 [diff]
