@@ -30,16 +30,13 @@ if [[ -v ZINIT_HOME ]]; then
   autoload -Uz _zinit
   (( ${+_comps} )) && _comps[zinit]=_zinit
 
-  zinit ice depth=1
-  zinit light romkatv/powerlevel10k
+  zinit for \
+    light-mode depth'1' romkatv/powerlevel10k
 
-  zinit light zsh-users/zsh-completions
-  zinit light zdharma-continuum/fast-syntax-highlighting
-  zinit light simnalamburt/cgitc
-
-  autoload -Uz compinit
-  compinit
-  zinit cdreplay
+  zinit wait'' lucid for \
+    light-mode zsh-users/zsh-completions \
+    light-mode simnalamburt/cgitc \
+    light-mode atinit'zicompinit; zicdreplay' zdharma-continuum/fast-syntax-highlighting
 else
   PS1='%n@%m:%~%# '
   autoload -Uz compinit
