@@ -94,18 +94,18 @@ Plug 'neoclide/coc-java', { 'do': 'yarn install --frozen-lockfile' }
 set updatetime=300
 set shortmess+=c
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1] =~# '\s'
-endfunction
 " ^<Space> opens completion menu
 inoremap <silent><expr> <C-space> coc#refresh()
-" When completion menu is open, <CR> executes the menu item
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" - When completion menu is open, <Tab> selects the next menu item
-inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" When completion menu is open, Shift<Tab> selects the previous menu item
-inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" Use tab to navigate completion menu.
+inoremap <silent><expr> <Tab>
+      \ coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
+inoremap <expr><S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
