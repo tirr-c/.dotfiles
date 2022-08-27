@@ -25,10 +25,10 @@ if [[ -v ZINIT_HOME ]]; then
     light-mode depth'1' romkatv/powerlevel10k
 
   zinit wait'' lucid for \
-    light-mode zsh-users/zsh-completions \
     light-mode simnalamburt/cgitc \
     as'program' pick'git-select-branch' autoload'git-select-branch' \
       tirr-c/git-select-branch \
+    light-mode blockf zsh-users/zsh-completions \
     light-mode atinit'zicompinit; zicdreplay' zdharma-continuum/fast-syntax-highlighting
 else
   PS1='%n@%m:%~%# '
