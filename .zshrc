@@ -27,6 +27,8 @@ if [[ -v ZINIT_HOME ]]; then
   zinit wait'' lucid for \
     light-mode zsh-users/zsh-completions \
     light-mode simnalamburt/cgitc \
+    as'program' pick'git-select-branch' autoload'git-select-branch' \
+      tirr-c/git-select-branch \
     light-mode atinit'zicompinit; zicdreplay' zdharma-continuum/fast-syntax-highlighting
 else
   PS1='%n@%m:%~%# '
@@ -120,20 +122,6 @@ if [[ -f ~/.fzf.zsh ]]; then
 
     _fzf_compgen_dir() {
       fd --type d --hidden --exclude ".yarn" --follow --exclude ".git" . "$1"
-    }
-  fi
-
-  if hash git 2>/dev/null; then
-    gbfzf() {
-      git branch | egrep -v '^\*' | sed -e 's/^ *//' | \
-        fzf --ansi \
-        --prompt='git branch> ' \
-        --preview="git log --color=always --decorate --oneline --graph {1} | head -n $LINES"
-    }
-
-    gcoz() {
-      local branch="$(gbfzf)"
-      [[ -n "$branch" ]] && git checkout "$branch"
     }
   fi
 fi
