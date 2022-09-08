@@ -7,6 +7,9 @@ stty stop undef
 # GPG
 export GPG_TTY=$TTY
 
+# term
+export TERM="xterm-256color"
+
 #
 # zinit
 #
@@ -21,33 +24,76 @@ if [[ -v ZINIT_HOME ]]; then
   autoload -Uz _zinit
   (( ${+_comps} )) && _comps[zinit]=_zinit
 
+  # sbin ice
   zinit for \
-    light-mode depth'1' romkatv/powerlevel10k
+    light-mode zdharma-continuum/zinit-annex-bin-gem-node
 
+  # fzf
+  zinit wait'' lucid for \
+    from'gh-r' sbin'fzf' junegunn/fzf \
+    https://github.com/junegunn/fzf/raw/master/shell/{'completion','key-bindings'}.zsh
+
+  # kubectx, kubens
+  zinit wait'' lucid for \
+    from'gh-r' bpick'kubectx;kubens' sbin'kubectx;kubens' ahmetb/kubectx
+
+  # pyenv
+  zinit wait'' lucid for \
+    as'null' \
+    atload'! export PYENV_ROOT=$ZPFX/pyenv; export PATH=$PWD/bin:$PATH; eval "$(pyenv init -)"' \
+    pyenv/pyenv \
+    as'null' \
+    atclone'mkdir -p $ZPFX/pyenv/plugins; ln -s $PWD $ZPFX/pyenv/plugins/pyenv-virtualenv' \
+    atload'! eval "$(pyenv virtualenv-init -)"' \
+    pyenv/pyenv-virtualenv
+
+  # completions
   zinit wait'' lucid for \
     light-mode simnalamburt/cgitc \
     as'program' pick'git-select-branch' autoload'git-select-branch' \
       tirr-c/git-select-branch \
     light-mode blockf zsh-users/zsh-completions \
     light-mode atinit'zicompinit; zicdreplay' zdharma-continuum/fast-syntax-highlighting
+
+  # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+  # Initialization code that may require console input (password prompts, [y/n]
+  # confirmations, etc.) must go above this block; everything else may go below.
+  if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+  fi
+
+  # powerlevel10k
+  # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+  zinit for \
+    atload'! [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' \
+    romkatv/powerlevel10k
 else
   PS1='%n@%m:%~%# '
   autoload -Uz compinit
   compinit
 fi
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+if [[ -v ZINIT_HOME ]]; then
+  # fzf
+  [[ -n "$HISTFILE" ]] || HISTFILE="$HOME/.zsh_history"
+  HISTSIZE=10000
+  SAVEHIST=10000
 
-#
-# powerlevel10k
-#
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+  export FZF_COMPLETION_TRIGGER='\'
+
+  # Use fd if available
+  if (( ${+commands[fd]} )); then
+    export FZF_DEFAULT_COMMAND='fd --type f'
+
+    _fzf_compgen_path() {
+      fd --hidden --follow --exclude ".yarn" --exclude ".git" . "$1"
+    }
+
+    _fzf_compgen_dir() {
+      fd --type d --hidden --exclude ".yarn" --follow --exclude ".git" . "$1"
+    }
+  fi
+fi
 
 #
 # Terminal title
@@ -103,32 +149,6 @@ alias 니=ls
 alias ㅣㄴ=ls
 alias ㄴㅣ=ls
 
-# fzf
-if [[ -f ~/.fzf.zsh ]]; then
-  [[ -n "$HISTFILE" ]] || HISTFILE="$HOME/.zsh_history"
-  HISTSIZE=10000
-  SAVEHIST=10000
-  source ~/.fzf.zsh
-
-  export FZF_COMPLETION_TRIGGER='\'
-
-  # Use fd if available
-  if hash fd 2>/dev/null; then
-    export FZF_DEFAULT_COMMAND='fd --type f'
-
-    _fzf_compgen_path() {
-      fd --hidden --follow --exclude ".yarn" --exclude ".git" . "$1"
-    }
-
-    _fzf_compgen_dir() {
-      fd --type d --hidden --exclude ".yarn" --follow --exclude ".git" . "$1"
-    }
-  fi
-fi
-
-# term
-export TERM="xterm-256color"
-
 # ~/.local/bin
 [[ ! -d ~/.local/bin ]] || export PATH="$HOME/.local/bin:$PATH"
 # ~/.local/lib
@@ -160,18 +180,6 @@ fi
 # yarn global
 if hash yarn 2>/dev/null; then
   export PATH="$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-fi
-
-# pyenv
-if [[ -d ~/.pyenv ]]; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  export PATH="$HOME/.pyenv/bin:$PATH"
-
-  eval "$(pyenv init --path)"
-  eval "$(pyenv init -)"
-  if hash pyenv-virtualenv-init 2>/dev/null; then
-    eval "$(pyenv virtualenv-init -)"
-  fi
 fi
 
 # nodenv

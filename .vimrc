@@ -70,7 +70,7 @@ let &titlestring = '[' . $USER . '@' . hostname() . '] %f%( %m%)'
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 
 Plug 'vim-airline/vim-airline'
