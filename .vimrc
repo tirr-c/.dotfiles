@@ -95,17 +95,24 @@ set updatetime=300
 set shortmess+=c
 
 " ^<Space> opens completion menu
-inoremap <silent><expr> <C-space> coc#refresh()
+if has('nvim')
+  inoremap <silent><expr><C-space> coc#refresh()
+else
+  inoremap <silent><expr><C-@> coc#refresh()
+endif
 
-" Use tab to navigate completion menu.
-inoremap <silent><expr> <Tab>
-      \ coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
-inoremap <expr><S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+" Use <C-j>, <C-k> to navigate completion menu.
+inoremap <silent><expr><C-j>
+      \ coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
+inoremap <silent><expr><C-k>
+      \ coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
+inoremap <silent><expr><C-l>
+      \ coc#pum#visible() ? coc#pum#scroll(1) : "\<C-l>"
+inoremap <silent><expr><C-h>
+      \ coc#pum#visible() ? coc#pum#scroll(0) : "\<C-h>"
 
-" Make <CR> to accept selected completion item or notify coc.nvim to format
-" <C-g>u breaks current undo, please make your own choice.
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <silent><expr><Tab>
+      \ coc#pum#visible() ? coc#pum#confirm() : "\<Tab>"
 
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
