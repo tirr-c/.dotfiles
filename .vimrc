@@ -322,13 +322,16 @@ execute printf('hi tsxAttrib ctermfg=216 guifg=%s cterm=italic', s:color(216))
 " coc.nvim
 execute 'hi NormalFloat ctermbg=235 guibg=' . s:color(235)
 execute printf('hi Pmenu ctermbg=235 ctermfg=252 guibg=%s guifg=%s', s:color(235), s:color(252))
+execute printf('hi CocPumMenu ctermbg=235 ctermfg=252 guibg=%s guifg=%s', s:color(235), s:color(252))
+execute 'hi CocMenuSel ctermbg=238 guibg=' . s:color(238)
 execute 'hi CocFloating ctermbg=235 guibg=' . s:color(235)
 execute 'hi CocHighlightText ctermbg=240 guibg=' . s:color(240)
-hi CocErrorSign guifg=#d75f87
+hi CocErrorSign ctermfg=168 guifg=#d75f87
+hi CocErrorFloat ctermfg=168 guifg=#d75f87
 hi CocWarningSign guifg=#d8af5f
-hi CocInfoSign guifg=#ffd787
+hi CocInfoSign ctermfg=222 guifg=#ffd787
 hi CocHintSign guifg=#add4fb
-hi CocCodeLens guifg=#d0d0d0
+hi CocCodeLens ctermfg=252 guifg=#d0d0d0
 
 if !empty(glob('~/.vimrc.local'))
   source ~/.vimrc.local
