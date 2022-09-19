@@ -57,6 +57,15 @@ if [[ -v ZINIT_HOME ]]; then
     atload'! eval "$(pyenv virtualenv-init -)"' \
     pyenv/pyenv-virtualenv
 
+  # nodenv
+  zinit wait'' lucid for \
+    as'null' \
+    atload'! export NODENV_ROOT=$ZPFX/nodenv; export PATH=$PWD/bin:$PATH; eval "$(nodenv init -)"' \
+    @nodenv/nodenv \
+    as'null' \
+    atclone'mkdir -p $ZPFX/nodenv/plugins; ln -s $PWD $ZPFX/nodenv/plugins/node-build' \
+    @nodenv/node-build
+
   # completions
   zinit wait'' lucid for \
     light-mode simnalamburt/cgitc \
@@ -190,12 +199,6 @@ fi
 # yarn global
 if hash yarn 2>/dev/null; then
   export PATH="$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-fi
-
-# nodenv
-if [[ -d ~/.nodenv ]]; then
-  export PATH="$HOME/.nodenv/bin:$PATH"
-  eval "$(nodenv init -)"
 fi
 
 # deno
