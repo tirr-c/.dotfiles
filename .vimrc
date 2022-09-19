@@ -171,16 +171,18 @@ augroup tsfiletype
 augroup end
 
 " Terminals
-tnoremap <C-j><C-k> <C-\><C-n>
-augroup terminals
-  autocmd!
-  " No line number for terminal buffers
-  autocmd TermOpen * setlocal nonumber
-  " Automatically enter terminal mode
-  autocmd TermOpen *sh,*cmd.exe startinsert
-  " Close terminal buffer if exit code is 0
-  autocmd TermClose *sh,*cmd.exe if !v:event.status | exe 'bdelete! '..expand('<abuf>') | endif
-augroup end
+if has('nvim')
+  tnoremap <C-j><C-k> <C-\><C-n>
+  augroup terminals
+    autocmd!
+    " No line number for terminal buffers
+    autocmd TermOpen * setlocal nonumber
+    " Automatically enter terminal mode
+    autocmd TermOpen *sh,*cmd.exe startinsert
+    " Close terminal buffer if exit code is 0
+    autocmd TermClose *sh,*cmd.exe if !v:event.status | exe 'bdelete! '..expand('<abuf>') | endif
+  augroup end
+endif
 
 
 " colors
