@@ -51,21 +51,34 @@ if [[ -v ZINIT_HOME ]]; then
 
   # pyenv
   zinit wait'' lucid for \
-    as'null' \
-    atload'! export PYENV_ROOT=$ZPFX/pyenv; export PATH=$PWD/bin:$PATH; eval "$(pyenv init -)"' \
+    atclone'
+      echo "export PYENV_ROOT=$ZPFX/pyenv; export PATH=$PWD/bin:\$PATH" >pyenv-init.zsh
+      ./bin/pyenv init - >>pyenv-init.zsh
+    ' \
+    atpull'%atclone' \
+    nocompile'!' pick'pyenv-init.zsh' \
     pyenv/pyenv \
-    as'null' \
-    atclone'mkdir -p $ZPFX/pyenv/plugins; ln -s $PWD $ZPFX/pyenv/plugins/pyenv-virtualenv' \
-    atload'! eval "$(pyenv virtualenv-init -)"' \
+    atclone'
+      local plugins=$ZPFX/pyenv/plugins
+      mkdir -p $plugins
+      ln -sf $PWD $plugins/pyenv-virtualenv
+      $plugins/pyenv-virtualenv/bin/pyenv-virtualenv-init - >pyenv-virtualenv-init.zsh
+    ' \
+    atpull'%atclone' \
+    nocompile'!' pick'pyenv-virtualenv-init.zsh' \
     pyenv/pyenv-virtualenv
 
   # nodenv
   zinit wait'' lucid for \
-    as'null' \
-    atload'! export NODENV_ROOT=$ZPFX/nodenv; export PATH=$PWD/bin:$PATH; eval "$(nodenv init -)"' \
+    atclone'
+      echo "export NODENV_ROOT=$ZPFX/nodenv; export PATH=$PWD/bin:\$PATH" >nodenv-init.zsh
+      ./bin/nodenv init - >>nodenv-init.zsh
+    ' \
+    atpull'%atclone' \
+    nocompile'!' pick'nodenv-init.zsh' \
     @nodenv/nodenv \
     as'null' \
-    atclone'mkdir -p $ZPFX/nodenv/plugins; ln -s $PWD $ZPFX/nodenv/plugins/node-build' \
+    atclone'mkdir -p $ZPFX/nodenv/plugins; ln -sf $PWD $ZPFX/nodenv/plugins/node-build' \
     @nodenv/node-build
 
   # ls-colors
