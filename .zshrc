@@ -101,17 +101,6 @@ fi
 
 # zshrc [[[1
 
-# Terminal title
-function precmd() {
-  print -Pn "\e]0;[%n@%m %~]%#\a"
-}
-
-function preexec() {
-  print -Pn "\e]0;[%n@%m %~]%# "
-  echo -n $2
-  echo -ne "\a"
-}
-
 # Ruby
 if hash ruby 2>/dev/null && hash gem 2>/dev/null; then
   export GEM_HOME=$(ruby -e 'print Gem.user_dir')
