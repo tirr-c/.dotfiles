@@ -72,6 +72,13 @@ if [[ -v ZINIT_HOME ]]; then
   zinit wait'' lucid for \
     tirr-c/zsh-env-setup
 
+  # ls-colors
+  zinit wait'' lucid for \
+    atclone'local x=dircolors; if (( ${+commands[gdircolors]} )); then x=gdircolors; fi; $x -b LS_COLORS >clrs.zsh' \
+    atpull'%atclone' pick'clrs.zsh' nocompile'!' \
+    atload'zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"' \
+    light-mode trapd00r/LS_COLORS
+
   # completions
   zinit wait'' lucid for \
     light-mode simnalamburt/cgitc \
