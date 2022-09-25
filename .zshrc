@@ -41,13 +41,16 @@ if [[ -v ZINIT_HOME ]]; then
     light-mode zdharma-continuum/zinit-annex-bin-gem-node
 
   # fzf
-  zinit wait'' lucid for \
+  zinit for \
     from'gh-r' sbin'fzf' junegunn/fzf \
     https://github.com/junegunn/fzf/raw/master/shell/{'completion','key-bindings'}.zsh
 
   # kubectx, kubens
-  zinit wait'' lucid for \
-    from'gh-r' bpick'kubectx;kubens' sbin'kubectx;kubens' ahmetb/kubectx
+  zinit for \
+    sbin'kubectx;kubens' light-mode ahmetb/kubectx
+
+  # personal env configuration
+  zinit load tirr-c/zsh-env-setup
 
   # pyenv
   zinit wait'' lucid for \
@@ -91,10 +94,6 @@ if [[ -v ZINIT_HOME ]]; then
     atpull'%atclone' pick'clrs.zsh' nocompile'!' \
     atload'zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"' \
     light-mode trapd00r/LS_COLORS
-
-  # personal env configuration
-  zinit wait'' lucid for \
-    tirr-c/zsh-env-setup
 
   # completions
   zinit wait'' lucid for \
