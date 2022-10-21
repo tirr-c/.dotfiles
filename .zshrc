@@ -9,7 +9,10 @@ stty stop undef
 export GPG_TTY=$TTY
 
 # term
-export TERM="xterm-256color"
+typeset -a supported_terms=('xterm-256color' 'tmux-256color' 'alacritty-direct')
+if (( ! ${supported_terms[(Ie)$TERM]} )); then
+  export TERM='xterm-256color'
+fi
 
 # Homebrew [[[2
 if [[ -d /opt/homebrew ]]; then
