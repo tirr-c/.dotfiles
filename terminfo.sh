@@ -2,7 +2,7 @@
 emulate -LR zsh
 setopt extendedglob typesetsilent
 
-typeset -a terms=('tmux-256color' 'alacritty-direct')
+typeset -a terms=('xterm-256color' 'tmux-256color' 'alacritty-direct')
 
 typeset -a targets=()
 for target in $terms; do
@@ -12,6 +12,11 @@ for target in $terms; do
     targets+=($target)
   fi
 done
+
+if (( ! ${#targets} )); then
+  echo 'Nothing to install' 2>&1
+  exit 0
+fi
 
 echo "Installing terminfo ${(j:, :)targets}" 2>&1
 local tempfile="$(mktemp)"
