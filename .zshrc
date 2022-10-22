@@ -9,9 +9,12 @@ stty stop undef
 export GPG_TTY=$TTY
 
 # term
-typeset -a supported_terms=('xterm-256color' 'tmux-256color' 'alacritty-direct')
-if (( ! ${supported_terms[(Ie)$TERM]} )); then
+if ! infocmp -x $TERM >/dev/null 2>&1; then
+  echo ".zshrc: Unknown terminal $TERM, setting TERM='xterm-256color'" >&2
   export TERM='xterm-256color'
+fi
+if (( $(tput colors) < 256 )); then
+  echo ".zshrc: Terminal $TERM is not 256-color" >&2
 fi
 
 # Homebrew [[[2
