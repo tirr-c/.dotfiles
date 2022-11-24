@@ -140,7 +140,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
+Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'posva/vim-vue'
 Plug 'hashivim/vim-terraform'
 Plug 'digitaltoad/vim-pug'
@@ -170,12 +170,6 @@ let g:strip_whitespace_on_save = 1
 
 let g:jsx_ext_required = 0
 let g:xml_syntax_folding = 0
-
-" typescript.tsx
-augroup tsfiletype
-  autocmd!
-  autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
-augroup end
 
 " Terminals
 if has('nvim')
@@ -311,20 +305,20 @@ if v:version >= 703
 endif
 
 " dark red
-execute 'hi tsxTagName ctermfg=168 guifg=' . s:color(168)
-hi link tsxComponentName tsxTagName
-execute 'hi tsxCloseTagName ctermfg=174 guifg=' . s:color(174)
-hi link tsxCloseComponentName tsxCloseTagName
+execute 'hi jsxTagName ctermfg=168 guifg=' . s:color(168)
+hi link jsxComponentName jsxTagName
+execute 'hi jsxCloseTag ctermfg=174 guifg=' . s:color(174)
 
 " orange
-execute 'hi tsxCloseString ctermfg=210 guifg=' . s:color(210)
-execute 'hi tsxTag ctermfg=210 guifg=' . s:color(210)
-execute 'hi tsxCloseTag ctermfg=216 guifg=' . s:color(216)
-execute 'hi tsxAttributeBraces ctermfg=210 guifg=' . s:color(210)
-execute 'hi tsxEqual ctermfg=210 guifg=' . s:color(210)
+execute 'hi jsxCloseString ctermfg=210 guifg=' . s:color(210)
+" execute 'hi jsxTagName ctermfg=210 guifg=' . s:color(210)
+" execute 'hi jsxComponentName ctermfg=210 guifg=' . s:color(210)
+execute 'hi jsxCloseTag ctermfg=216 guifg=' . s:color(216)
+" execute 'hi tsxAttributeBraces ctermfg=210 guifg=' . s:color(210)
+execute 'hi jsxEqual ctermfg=210 guifg=' . s:color(210)
 
 " yellow
-execute printf('hi tsxAttrib ctermfg=216 guifg=%s cterm=italic', s:color(216))
+execute printf('hi jsxAttrib ctermfg=216 guifg=%s cterm=italic', s:color(216))
 
 " coc.nvim
 execute 'hi NormalFloat ctermbg=235 guibg=' . s:color(235)
