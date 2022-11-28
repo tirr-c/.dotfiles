@@ -327,12 +327,17 @@ execute printf('hi CocPumMenu ctermbg=235 ctermfg=252 guibg=%s guifg=%s', s:colo
 execute 'hi CocMenuSel ctermbg=238 guibg=' . s:color(238)
 execute 'hi CocFloating ctermbg=235 guibg=' . s:color(235)
 execute 'hi CocHighlightText ctermbg=240 guibg=' . s:color(240)
-hi CocErrorSign ctermfg=168 guifg=#d75f87
-hi CocErrorFloat ctermfg=168 guifg=#d75f87
-hi CocWarningSign guifg=#d8af5f
-hi CocInfoSign ctermfg=222 guifg=#ffd787
-hi CocHintSign guifg=#add4fb
+hi Conceal ctermfg=248 ctermbg=NONE guifg=#a8a8a8 guibg=NONE
+hi DiagnosticError ctermfg=168 guifg=#d75f87
+hi DiagnosticSignError ctermfg=168 ctermbg=234 guifg=#d75f87 guibg=#1c1c1c
+hi DiagnosticWarn guifg=#d8af5f
+hi DiagnosticSignWarn ctermfg=3 ctermbg=234 guifg=#d8af5f guibg=#1c1c1c
+hi DiagnosticInfo ctermfg=222 guifg=#ffd787
+hi DiagnosticSignInfo ctermfg=222 ctermbg=234 guifg=#ffd787 guibg=#1c1c1c
+hi DiagnosticHint guifg=#add4fb
+hi DiagnosticSignHint ctermfg=7 ctermbg=234 guifg=#add4fb guibg=#1c1c1c
 hi CocCodeLens ctermfg=252 guifg=#d0d0d0
+hi CocInlayHint ctermfg=153 cterm=italic guifg=#add4fb gui=italic
 
 if !empty(glob('~/.vimrc.local'))
   source ~/.vimrc.local
