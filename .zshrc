@@ -1,6 +1,11 @@
 # If not running interactively, don't do anything
 [[ -o interactive ]] || return
 
+# Load local zshrc
+if [[ -f ~/.zshrc.local ]]; then
+  source ~/.zshrc.local
+fi
+
 # Early zsh setup [[[1
 # Disable undef
 stty stop undef
@@ -59,24 +64,30 @@ if [[ -v ZINIT_HOME ]]; then
   zinit load tirr-c/zsh-env-setup
 
   # pyenv
-  zinit wait'' lucid for \
-    atclone'
-      export PYENV_ROOT=$ZPFX/pyenv
-      echo "export PYENV_ROOT=$PYENV_ROOT; export PATH=$PWD/bin:\$PATH" >pyenv-init.zsh
-      ./bin/pyenv init - >>pyenv-init.zsh
-    ' \
-    atpull'%atclone' \
-    nocompile'!' pick'pyenv-init.zsh' \
-    pyenv/pyenv \
-    atclone'
-      export PYENV_ROOT=$ZPFX/pyenv
-      mkdir -p $PYENV_ROOT/plugins
-      ln -sf $PWD $PYENV_ROOT/plugins/pyenv-virtualenv
-      $PYENV_ROOT/plugins/pyenv-virtualenv/bin/pyenv-virtualenv-init - >pyenv-virtualenv-init.zsh
-    ' \
-    atpull'%atclone' \
-    nocompile'!' pick'pyenv-virtualenv-init.zsh' \
-    pyenv/pyenv-virtualenv
+  if [[ -v TIRR_LOAD_PYENV ]]; then
+    zinit wait'' lucid for \
+      atclone'
+        export PYENV_ROOT=$ZPFX/pyenv
+        echo "export PYENV_ROOT=$PYENV_ROOT; export PATH=$PWD/bin:\$PATH" >pyenv-init.zsh
+        ./bin/pyenv init - >>pyenv-init.zsh
+      ' \
+      atpull'%atclone' \
+      nocompile'!' pick'pyenv-init.zsh' \
+      pyenv/pyenv
+
+    if [[ "${TIRR_LOAD_PYENV}" == "venv" ]]; then
+      zinit wait'' lucid for \
+        atclone'
+          export PYENV_ROOT=$ZPFX/pyenv
+          mkdir -p $PYENV_ROOT/plugins
+          ln -sf $PWD $PYENV_ROOT/plugins/pyenv-virtualenv
+          $PYENV_ROOT/plugins/pyenv-virtualenv/bin/pyenv-virtualenv-init - >pyenv-virtualenv-init.zsh
+        ' \
+        atpull'%atclone' \
+        nocompile'!' pick'pyenv-virtualenv-init.zsh' \
+        pyenv/pyenv-virtualenv
+    fi
+  fi
 
   # nodenv
   zinit wait'' lucid for \
@@ -196,10 +207,5 @@ wttr() {
 }
 
 # ]]]1
-
-# Load local zshrc
-if [[ -f ~/.zshrc.local ]]; then
-  source ~/.zshrc.local
-fi
 
 # vim:ft=zsh:tw=100:sw=2:sts=2:et:foldmethod=marker:foldmarker=[[[,]]]
