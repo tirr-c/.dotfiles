@@ -90,6 +90,7 @@ Plug 'neoclide/coc-highlight', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'fannheyward/coc-rust-analyzer', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'clangd/coc-clangd', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-java', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'fannheyward/coc-deno', { 'do': 'yarn install --frozen-lockfile' }
 
 set updatetime=300
 set shortmess+=c
