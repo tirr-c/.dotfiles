@@ -82,6 +82,8 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/seoul256.vim'
 
+Plug 'github/copilot.vim'
+
 " coc.nvim
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'neoclide/coc-tsserver', { 'do': 'yarn install --frozen-lockfile' }
@@ -95,16 +97,10 @@ Plug 'fannheyward/coc-deno', { 'do': 'yarn install --frozen-lockfile' }
 set updatetime=300
 set shortmess+=c
 
-" ^<Space> opens completion menu
-if has('nvim')
-  inoremap <silent><expr><C-space> coc#refresh()
-else
-  inoremap <silent><expr><C-@> coc#refresh()
-endif
-
 " Use <C-j>, <C-k> to navigate completion menu.
+" <C-j> opens completion menu
 inoremap <silent><expr><C-j>
-      \ coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
+      \ coc#pum#visible() ? coc#pum#next(1) : coc#refresh()
 inoremap <silent><expr><C-k>
       \ coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
 inoremap <silent><expr><C-l>
@@ -112,8 +108,14 @@ inoremap <silent><expr><C-l>
 inoremap <silent><expr><C-h>
       \ coc#pum#visible() ? coc#pum#scroll(0) : "\<C-h>"
 
-inoremap <silent><expr><Tab>
-      \ coc#pum#visible() ? coc#pum#confirm() : "\<Tab>"
+let g:copilot_no_tab_map = v:true
+inoremap <silent><expr><tab>
+      \ coc#pum#visible() && coc#pum#info()['index'] != -1 ? coc#pum#confirm() :
+      \ exists('b:_copilot.suggestions') ? copilot#Accept("\<CR>") :
+      \ "\<Tab>"
+
+inoremap <silent><expr><Esc>
+      \ coc#pum#visible() && coc#pum#info()['index'] != -1 ? coc#pum#cancel() : "\<Esc>"
 
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
@@ -130,8 +132,7 @@ augroup cocsettings
         \ setl formatexpr=CocAction('formatSelected')
 augroup end
 
-nmap <leader>a <Plug>(coc-codeaction-selected)
-nmap <leader>ac :CocAction<CR>
+nmap <leader>ac <Plug>(coc-codeaction-cursor)
 xmap <leader>ac <Plug>(coc-codeaction-selected)
 
 nmap <leader>rn <Plug>(coc-rename)
