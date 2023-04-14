@@ -110,12 +110,12 @@ inoremap <silent><expr><C-h>
 
 let g:copilot_no_tab_map = v:true
 inoremap <silent><expr><tab>
-      \ coc#pum#visible() && coc#pum#info()['index'] != -1 ? coc#pum#confirm() :
-      \ exists('b:_copilot.suggestions') ? copilot#Accept("\<CR>") :
-      \ "\<Tab>"
+      \ coc#pum#visible() && coc#pum#info()['inserted'] ? coc#pum#confirm() :
+      \ coc#pum#visible() && copilot#GetDisplayedSuggestion()['text'] ==# '' ? coc#pum#confirm() :
+      \ copilot#Accept("\<Tab>")
 
 inoremap <silent><expr><Esc>
-      \ coc#pum#visible() && coc#pum#info()['index'] != -1 ? coc#pum#cancel() : "\<Esc>"
+      \ coc#pum#visible() && coc#pum#info()['inserted'] ? coc#pum#cancel() : "\<Esc>"
 
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
