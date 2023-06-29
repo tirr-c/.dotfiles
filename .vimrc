@@ -171,6 +171,8 @@ if has('nvim')
     autocmd!
     " No line number for terminal buffers
     autocmd TermOpen * setlocal nonumber
+    " Disable whitespace highlighting
+    autocmd TermOpen * DisableWhitespace
     " Automatically enter terminal mode
     autocmd TermOpen *sh,*cmd.exe startinsert
     " Close terminal buffer if exit code is 0
