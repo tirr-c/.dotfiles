@@ -1,9 +1,11 @@
 [core]
 	editor = nvim
 	excludesfile = ~/.gitexclude
+	pager = delta-or-less
 [merge]
 	conflictstyle = diff3
 [diff]
+	colorMoved = default
 	tool = vimdiff
 [init]
 	defaultBranch = main
@@ -11,3 +13,10 @@
 	signingKey = ~/.ssh/id_ed25519.pub
 [gpg]
 	format = ssh
+[interactive]
+	diffFilter = delta-or-less --color-only
+[delta]
+	light = false
+	line-numbers = true
+	navigate = true
+	side-by-side = true
