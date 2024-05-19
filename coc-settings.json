@@ -1,6 +1,11 @@
 {
   "diagnostic.warningSign": ">>",
-  "rust-analyzer.checkOnSave.command": "clippy",
+  "rust-analyzer.check.command": "clippy",
+  "workspace.ignoredFolders": [
+    "$HOME",
+    "$HOME/.cargo/**",
+    "$HOME/.rustup/**"
+  ],
   "languageserver": {
     "ocaml-lsp": {
       "command": "opam",
