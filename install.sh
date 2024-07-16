@@ -35,7 +35,7 @@ curl -sSfL https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |
   tee ~/.vim/autoload/plug.vim >~/.local/share/nvim/site/autoload/plug.vim
 
 # Symlinking
-typeset -a dotfiles=(.zshrc .p10k.zsh .vimrc .ideavimrc .tmux.conf .npmrc .gitconfig .gitexclude)
+typeset -a dotfiles=(.zshrc .p10k.zsh .vimrc .ideavimrc .tmux.conf .gitconfig .gitexclude)
 for dotfile in $dotfiles; do
   echo "Symlinking $dotfile"
   ln -rsf "$basedir/$dotfile" "$HOME/$dotfile"
