@@ -1,6 +1,9 @@
 {
   "diagnostic.warningSign": ">>",
   "rust-analyzer.check.command": "clippy",
+  "rust-analyzer.inlayHints.typeHints.enable": false,
+  "rust-analyzer.inlayHints.chainingHints.enable": true,
+  "rust-analyzer.inlayHints.parameterHints.enable": false,
   "workspace.ignoredFolders": [
     "$HOME",
     "$HOME/.cargo/**",
